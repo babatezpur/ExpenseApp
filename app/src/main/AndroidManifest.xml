@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Expense"
         tools:targetApi="31">
         <activity
+            android:name=".views.AddNewExpenseActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.MainActivity"
             android:exported="true">
             <intent-filter>
