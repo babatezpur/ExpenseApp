@@ -1,9 +1,7 @@
 package com.sdprojects.expense.viewmodels
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.sdprojects.expense.models.Category
 import com.sdprojects.expense.repositories.CategoryRepository
 import com.sdprojects.expense.room.CategoryDao
@@ -13,13 +11,17 @@ import kotlinx.coroutines.launch
 
 class NewExpenseViewModel(application: Application) : AndroidViewModel(application) {
     private val categoryRepository: CategoryRepository
-    val allCategories : List<Category>
-    //val allCategories: LiveData<List<Category>>
+    val allCategories: MutableLiveData<List<Category>> = MutableLiveData()
 
     init {
         val categoryDao = CategoryRoomDatabase.getDatabase(application).categoryDao()
         categoryRepository = CategoryRepository(categoryDao)
-        allCategories = categoryRepository.getAllCategories()
+        viewModelScope.launch(Dispatchers.IO) {
+            // Call the suspend function getAllCategories within a coroutine
+            val categories = categoryRepository.getAllCategories()
+            // Assign the result to LiveData
+            allCategories.postValue(categories)
+        }
     }
 
     fun insertCategory(category: Category) = viewModelScope.launch(Dispatchers.IO) {

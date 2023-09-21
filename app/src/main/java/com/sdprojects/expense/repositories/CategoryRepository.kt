@@ -5,11 +5,11 @@ import com.sdprojects.expense.room.CategoryDao
 
 class CategoryRepository(private val categoryDao : CategoryDao) {
 
-    fun getAllCategories() : List<Category>{
+    suspend fun getAllCategories() : List<Category>{
         return categoryDao.getAllCategories()
     }
 
-    fun insertCategory(category : Category){
+    suspend fun insertCategory(category : Category){
         categoryDao.insertCategory(category)
     }
 }

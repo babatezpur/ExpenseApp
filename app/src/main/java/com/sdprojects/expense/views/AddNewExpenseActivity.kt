@@ -3,15 +3,17 @@ package com.sdprojects.expense.views
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
+import androidx.lifecycle.ViewModelProvider
 import com.sdprojects.expense.R
+import com.sdprojects.expense.models.Category
 import com.sdprojects.expense.viewmodels.NewExpenseViewModel
+import com.sdprojects.expense.viewmodels.NewExpenseViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,7 +27,9 @@ class AddNewExpenseActivity : AppCompatActivity() {
     private lateinit var categoryEditText : EditText
     private lateinit var dropdownButton : ImageButton
 
-    private lateinit var categoryViewModel: NewExpenseViewModel
+    private lateinit var categoryList : List<Category>
+
+    private lateinit var newExpenseViewModel: NewExpenseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,13 @@ class AddNewExpenseActivity : AppCompatActivity() {
         showDateTimePickerButton = findViewById(R.id.showDateTimePickerButton)
         categoryEditText = findViewById(R.id.editTextCategory)
         dropdownButton = findViewById(R.id.dropdownButton)
+
+        val viewModelFactory = NewExpenseViewModelFactory(application)
+        newExpenseViewModel = ViewModelProvider(this, viewModelFactory).get(NewExpenseViewModel::class.java)
+
+        newExpenseViewModel.allCategories.observe(this){
+            categoryList = it
+        }
 
         dropdownButton.setOnClickListener {
             showDropdownMenu()
@@ -46,8 +57,7 @@ class AddNewExpenseActivity : AppCompatActivity() {
 
     private fun showDropdownMenu() {
         val popupMenu = PopupMenu(this, dropdownButton)
-        val categories = categoryViewModel.allCategories
-        categories?.forEach { category ->
+        categoryList.forEach { category ->
             popupMenu.menu.add(category.toString())
         }
         popupMenu.menu.add("Other")
