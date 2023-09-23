@@ -10,9 +10,9 @@ import com.sdprojects.expense.models.Category
 interface CategoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCategory(category : Category)
+    suspend fun insertCategory(category : Category)
 
     @Query("select * from Category")
-    fun getAllCategories() : List<Category>
+    suspend fun getAllCategories() : List<Category>
 
 }

@@ -8,8 +8,8 @@ import java.util.*
 data class ExpenseModel( @PrimaryKey(autoGenerate = true) var id : Long? = null,
                          val title : String,
                          val amount : Float,
-                         //TODO: Add category structure
-                         val Date : Date,
-
+                         val category : Category,
+                         val dateTime : String,
+                         val note : String?
 ) {
 }

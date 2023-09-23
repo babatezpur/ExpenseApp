@@ -24,7 +24,7 @@ class NewExpenseViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun insertCategory(category: Category) = viewModelScope.launch(Dispatchers.IO) {
-        categoryRepository.insertCategory(category)
+    fun insertCategory(category: String) = viewModelScope.launch(Dispatchers.IO) {
+        categoryRepository.insertCategory(Category(category = category))
     }
 }

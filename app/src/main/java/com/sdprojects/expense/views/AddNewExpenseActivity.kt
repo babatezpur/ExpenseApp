@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
@@ -26,10 +27,18 @@ class AddNewExpenseActivity : AppCompatActivity() {
     private val selectedDateTime: Calendar = Calendar.getInstance()
     private lateinit var categoryEditText : EditText
     private lateinit var dropdownButton : ImageButton
+    private lateinit var saveButton : Button
+    private lateinit var editTextAmount: EditText
+    private lateinit var editTextExpenseName : EditText
+
+    private lateinit var textViewDate : TextView
+    private lateinit var textViewTime : TextView
 
     private lateinit var categoryList : List<Category>
 
     private lateinit var newExpenseViewModel: NewExpenseViewModel
+
+    private lateinit var editTextNote : EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +47,13 @@ class AddNewExpenseActivity : AppCompatActivity() {
         showDateTimePickerButton = findViewById(R.id.showDateTimePickerButton)
         categoryEditText = findViewById(R.id.editTextCategory)
         dropdownButton = findViewById(R.id.dropdownButton)
+        saveButton = findViewById(R.id.buttonSave)
+
+        textViewDate = findViewById(R.id.textViewDate)
+        textViewTime = findViewById(R.id.textViewTime)
+
+        editTextAmount = findViewById(R.id.editTextExpenseAmount)
+        editTextExpenseName = findViewById(R.id.editTextExpenseName)
 
         val viewModelFactory = NewExpenseViewModelFactory(application)
         newExpenseViewModel = ViewModelProvider(this, viewModelFactory).get(NewExpenseViewModel::class.java)
@@ -53,6 +69,28 @@ class AddNewExpenseActivity : AppCompatActivity() {
         showDateTimePickerButton.setOnClickListener {
            showDateTimePicker()
         }
+
+        saveButton.setOnClickListener {
+            saveButtonClicked()
+        }
+    }
+
+    fun saveButtonClicked(){
+        if(categoryEditText.text.isEmpty() || editTextAmount.text.isEmpty()){
+            Toast.makeText(applicationContext, "Please enter Amount and Category correctly", Toast.LENGTH_LONG).show()
+            return
+        }
+        if(textViewDate.text.isEmpty() || textViewTime.text.isEmpty()){
+            Toast.makeText(applicationContext, "Please choose Date and Time by clicking the button", Toast.LENGTH_LONG).show()
+            return
+        }
+        val expenseName = editTextExpenseName.text.takeIf { it.isNotEmpty() }?.toString() ?: "Unnamed ${editTextAmount.text}"
+        val category = categoryEditText.text.toString()
+        val amount = editTextAmount.text
+        val dateTime = "$textViewDate $textViewTime"
+        val note = editTextNote
+
+        newExpenseViewModel.insertCategory(category)
     }
 
     private fun showDropdownMenu() {
@@ -101,7 +139,9 @@ class AddNewExpenseActivity : AppCompatActivity() {
                             this,
                             "Selected Date and Time: $formattedDateTime", Toast.LENGTH_LONG
                         ).show()
-                    }, hour, minute, false
+                        textViewDate.text = formattedDateTime.split(' ')[0]
+                        textViewTime.text = formattedDateTime.split(' ')[1]
+                    }, hour, minute, true
                 )
                 timePickerDialog.show()
             }, year, month, day
@@ -110,4 +150,6 @@ class AddNewExpenseActivity : AppCompatActivity() {
             System.currentTimeMillis() - 1000 // Restrict to future dates
         datePickerDialog.show()
     }
+
+
 }
