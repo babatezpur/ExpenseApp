@@ -86,11 +86,21 @@ class AddNewExpenseActivity : AppCompatActivity() {
         }
         val expenseName = editTextExpenseName.text.takeIf { it.isNotEmpty() }?.toString() ?: "Unnamed ${editTextAmount.text}"
         val category = categoryEditText.text.toString()
-        val amount = editTextAmount.text
-        val dateTime = "$textViewDate $textViewTime"
-        val note = editTextNote
+        val amount = editTextAmount.text.toString()
+        val date = "$textViewDate"
+        val time = "$textViewTime"
+        val note = editTextNote.text.toString()
 
         newExpenseViewModel.insertCategory(category)
+        newExpenseViewModel.insertExpense(
+            expenseName,
+            amount.toLong(),
+            Category(category = category),
+            date,
+            time,
+            note
+        )
+
     }
 
     private fun showDropdownMenu() {

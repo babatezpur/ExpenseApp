@@ -5,11 +5,12 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity
-data class ExpenseModel( @PrimaryKey(autoGenerate = true) var id : Long? = null,
-                         val title : String,
-                         val amount : Float,
+data class ExpenseModel( @PrimaryKey(autoGenerate = true) var id : Long = 0,
+                         val name : String,
+                         val amount : Long,
                          val category : Category,
-                         val dateTime : String,
+                         val date : String,
+                         val time : String,
                          val note : String?
 ) {
 }
