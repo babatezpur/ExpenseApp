@@ -28,6 +28,7 @@ class AddNewExpenseActivity : AppCompatActivity() {
     private lateinit var categoryEditText : EditText
     private lateinit var dropdownButton : ImageButton
     private lateinit var saveButton : Button
+    private lateinit var cancelButton: Button
     private lateinit var editTextAmount: EditText
     private lateinit var editTextExpenseName : EditText
 
@@ -48,6 +49,8 @@ class AddNewExpenseActivity : AppCompatActivity() {
         categoryEditText = findViewById(R.id.editTextCategory)
         dropdownButton = findViewById(R.id.dropdownButton)
         saveButton = findViewById(R.id.buttonSave)
+        cancelButton = findViewById(R.id.buttonCancel)
+
 
         textViewDate = findViewById(R.id.textViewDate)
         textViewTime = findViewById(R.id.textViewTime)
@@ -72,6 +75,10 @@ class AddNewExpenseActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
             saveButtonClicked()
+        }
+
+        cancelButton.setOnClickListener {
+            onBackPressed()
         }
     }
 
@@ -100,7 +107,7 @@ class AddNewExpenseActivity : AppCompatActivity() {
             time,
             note
         )
-
+        onBackPressed()
     }
 
     private fun showDropdownMenu() {

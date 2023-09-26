@@ -13,6 +13,7 @@
         app:cardCornerRadius="20dp"
         android:layout_marginTop="5dp"
         android:layout_margin="5dp"
+        app:cardBackgroundColor="@color/purple_200"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -21,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/amount"
@@ -31,6 +33,7 @@
             android:layout_marginTop="55dp"
             android:layout_marginBottom="5dp"
             android:textAlignment="viewStart"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -40,7 +43,8 @@
             android:layout_marginStart="120dp"
             android:layout_marginTop="55dp"
             android:layout_marginBottom="5dp"
-            android:textAlignment="textStart" />
+            android:textAlignment="textStart"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/datetime"
@@ -50,7 +54,8 @@
             android:layout_marginTop="55dp"
             android:layout_marginBottom="5dp"
             android:text=" Time 14:55  \n Date 14/08/23 "
-            android:textAlignment="viewStart" />
+            android:textAlignment="viewStart"
+            android:textColor="@color/black" />
 
 
 
