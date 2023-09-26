@@ -7,17 +7,23 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import com.sdprojects.expense.R
 
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var buttonAdd : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val intent = Intent(this, AddNewExpenseActivity::class.java)
-        startActivity(intent)
+        buttonAdd = findViewById(R.id.buttonAdd)
+        buttonAdd.setOnClickListener {
+            val intent = Intent(this, AddNewExpenseActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
