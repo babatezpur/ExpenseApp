@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".views.MainActivity">
-    
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:cardElevation="10dp"
-        app:cardCornerRadius="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_margin="5dp"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_margin="2dp"
         app:cardBackgroundColor="@color/purple_200"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -23,7 +23,10 @@
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
 
         <TextView
             android:id="@+id/amount"
@@ -34,7 +37,7 @@
             android:layout_marginBottom="5dp"
             android:textAlignment="viewStart"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/category"
@@ -44,7 +47,9 @@
             android:layout_marginTop="55dp"
             android:layout_marginBottom="5dp"
             android:textAlignment="textStart"
-            android:textColor="@color/black" />
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/datetime"
@@ -56,6 +61,8 @@
             android:text=" Time 14:55  \n Date 14/08/23 "
             android:textAlignment="viewStart"
             android:textColor="@color/black" />
+
+
 
 
 

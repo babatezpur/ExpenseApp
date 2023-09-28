@@ -33,7 +33,7 @@ class NewExpenseViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun insertExpense(expenseName : String, amount : Long, category : Category, date : String, time : String, note :  String) = viewModelScope.launch{
-        val expenseModel : ExpenseModel = ExpenseModel(name = expenseName, amount = amount, category = category, date = date, time = time, note = note )
+        val expenseModel  = ExpenseModel(name = expenseName, amount = amount, category = category, date = date, time = time, note = note )
         expenseRepository.insertExpense( expenseModel)
     }
 }

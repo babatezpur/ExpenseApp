@@ -50,7 +50,7 @@ class AddNewExpenseActivity : AppCompatActivity() {
         dropdownButton = findViewById(R.id.dropdownButton)
         saveButton = findViewById(R.id.buttonSave)
         cancelButton = findViewById(R.id.buttonCancel)
-
+        editTextNote = findViewById(R.id.editTextNote)
 
         textViewDate = findViewById(R.id.textViewDate)
         textViewTime = findViewById(R.id.textViewTime)
@@ -94,9 +94,11 @@ class AddNewExpenseActivity : AppCompatActivity() {
         val expenseName = editTextExpenseName.text.takeIf { it.isNotEmpty() }?.toString() ?: "Unnamed ${editTextAmount.text}"
         val category = categoryEditText.text.toString()
         val amount = editTextAmount.text.toString()
-        val date = "$textViewDate"
-        val time = "$textViewTime"
-        val note = editTextNote.text.toString()
+        val date = "${textViewDate.text}"
+        val time = "${textViewTime.text}"
+        var note = ""
+        if(!editTextNote.text.isEmpty())
+            note = editTextNote.text.toString()
 
         newExpenseViewModel.insertCategory(category)
         newExpenseViewModel.insertExpense(
@@ -113,7 +115,7 @@ class AddNewExpenseActivity : AppCompatActivity() {
     private fun showDropdownMenu() {
         val popupMenu = PopupMenu(this, dropdownButton)
         categoryList.forEach { category ->
-            popupMenu.menu.add(category.toString())
+            popupMenu.menu.add(category.category)
         }
         popupMenu.menu.add("Other")
 

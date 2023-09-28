@@ -1,5 +1,6 @@
 package com.sdprojects.expense.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sdprojects.expense.R
 import com.sdprojects.expense.models.ExpenseModel
 
-class ExpenseAdapter(private val listExpense : List<ExpenseModel>) : RecyclerView.Adapter<ExpenseAdapter.CustomViewHolder>() {
+class ExpenseAdapter(private var listExpense : List<ExpenseModel>) : RecyclerView.Adapter<ExpenseAdapter.CustomViewHolder>() {
 
     class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val expenseName : TextView = itemView.findViewById(R.id.name)
@@ -32,9 +33,16 @@ class ExpenseAdapter(private val listExpense : List<ExpenseModel>) : RecyclerVie
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val expense = listExpense[position]
+        Log.d("check234", "${expense.time}")
         holder.expenseName.text = expense.name
-        holder.expenseAmount.text = expense.amount.toString()
-        holder.expenseCategory.text = expense.category.toString()
+        holder.expenseAmount.text = "Rs. ${expense.amount}"
+        holder.expenseCategory.text = expense.category.category
         holder.expenseDate.text = "Time ${expense.time} \nDate ${expense.date}"
+    }
+
+    fun updateItems(newItems: List<ExpenseModel>) {
+        Log.d("check123", "Inside update items:  $newItems")
+        listExpense = newItems
+        notifyDataSetChanged()
     }
 }
