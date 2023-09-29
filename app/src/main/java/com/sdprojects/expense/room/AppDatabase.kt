@@ -10,7 +10,7 @@ import com.sdprojects.expense.models.Category
 import com.sdprojects.expense.models.ExpenseModel
 import com.sdprojects.expense.utils.Converters
 
-@Database(entities = [Category::class, ExpenseModel::class], version = 1)
+@Database(entities = [Category::class, ExpenseModel::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
