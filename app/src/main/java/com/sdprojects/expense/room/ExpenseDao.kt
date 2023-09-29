@@ -11,6 +11,6 @@ interface ExpenseDao {
     @Insert
     suspend fun insertExpense(expense : ExpenseModel)
 
-    @Query("select * from ExpenseModel")
+    @Query("select * from ExpenseModel order by date || ' ' || time desc limit 30")
     suspend fun getAllExpenses() : List<ExpenseModel>
 }
