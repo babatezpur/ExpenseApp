@@ -25,9 +25,48 @@
         android:id="@+id/frameTop"
         android:layout_width="match_parent"
         android:layout_height="75dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/pink_light"
         app:layout_constraintBottom_toTopOf="@id/frameList"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/pink_light"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/monthDropdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="15dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="Select Month"
+            android:inputType="text"
+            android:textSize="16sp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/yearDropdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="Select Year"
+            android:inputType="text"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/buttonGo"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/purple_200"
+            android:text="Go" />
+
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frameList"

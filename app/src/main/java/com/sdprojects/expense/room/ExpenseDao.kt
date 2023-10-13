@@ -13,4 +13,8 @@ interface ExpenseDao {
 
     @Query("select * from ExpenseModel order by date || ' ' || time desc limit 30")
     suspend fun getAllExpenses() : List<ExpenseModel>
+
+
+    @Query("select * from ExpenseModel where date like :yearMonth || '-%'")
+    suspend fun getSelectiveExpenses(yearMonth : String) : List<ExpenseModel>
 }
