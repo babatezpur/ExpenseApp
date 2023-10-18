@@ -10,6 +10,9 @@ class CategoryRepository(private val categoryDao : CategoryDao) {
     }
 
     suspend fun insertCategory(category : Category){
-        categoryDao.insertCategory(category)
+        val existingCategory = categoryDao.getCategoryByName(category.category)
+        if (existingCategory == null) {
+            categoryDao.insertCategory(category)
+        }
     }
 }

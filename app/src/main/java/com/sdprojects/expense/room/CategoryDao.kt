@@ -9,10 +9,13 @@ import com.sdprojects.expense.models.Category
 @Dao
 interface CategoryDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCategory(category : Category)
 
-    @Query("select * from Category")
+    @Query("SELECT * FROM Category WHERE category = :categoryName")
+    suspend fun getCategoryByName(categoryName: String): Category?
+
+    @Query("select * from Category group by category")
     suspend fun getAllCategories() : List<Category>
 
 }

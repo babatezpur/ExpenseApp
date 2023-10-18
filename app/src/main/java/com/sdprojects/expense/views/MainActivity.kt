@@ -100,7 +100,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonGo.setOnClickListener {
-            if(selectedMonthIndex.isNotEmpty() && selectedYear.isNotEmpty()) {
+            Log.d("check123", "${monthDropdown.length()}   ${yearDropdown.length()}")
+            if(monthDropdown.length() == 0 && yearDropdown.length() == 0){
+                expenses = viewModel.getExpenseList()
+                adapter.updateItems(expenses)
+            } else if(selectedMonthIndex.isNotEmpty() && selectedYear.isNotEmpty()) {
                 Log.d("check123", "Entered the block: $selectedMonthIndex $selectedYear")
                 expenses = viewModel.getSelectiveExpenses(selectedMonthIndex, selectedYear)
                 adapter.updateItems(expenses)
