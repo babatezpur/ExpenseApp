@@ -19,5 +19,9 @@ class EditExpenseViewModel(application: Application) : AndroidViewModel(applicat
         return expenseRepository.getExpenseFromId(id)
     }
 
+    suspend fun deleteExpenseWithId(id : Int) {
+        expenseRepository.deleteExpenseWithId(id)
+    }
+
 
 }

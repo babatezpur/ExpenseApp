@@ -1,6 +1,7 @@
 package com.sdprojects.expense.room
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.sdprojects.expense.models.ExpenseModel
@@ -20,4 +21,7 @@ interface ExpenseDao {
 
     @Query("select * from ExpenseModel where id = :id")
     suspend fun getExpenseFromId(id : Int) : ExpenseModel
+
+    @Query("delete from ExpenseModel where id = :id")
+    suspend fun deleteExpenseWithId(id: Int)
 }
