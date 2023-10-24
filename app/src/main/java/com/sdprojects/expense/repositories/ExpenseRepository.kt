@@ -16,4 +16,8 @@ class ExpenseRepository(private val expenseDao : ExpenseDao) {
     suspend fun getSelectiveExpenses(yearMonth : String) : List<ExpenseModel>{
         return expenseDao.getSelectiveExpenses(yearMonth)
     }
+
+    suspend fun getExpenseFromId(id : Int) : ExpenseModel{
+        return expenseDao.getExpenseFromId(id)
+    }
 }

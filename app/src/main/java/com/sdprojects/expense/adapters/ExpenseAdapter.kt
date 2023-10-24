@@ -11,6 +11,8 @@ import com.sdprojects.expense.models.ExpenseModel
 
 class ExpenseAdapter(private var listExpense : List<ExpenseModel>) : RecyclerView.Adapter<ExpenseAdapter.CustomViewHolder>() {
 
+    private var onClickListener: OnClickListener? = null
+
     class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val expenseName : TextView = itemView.findViewById(R.id.name)
         val expenseAmount : TextView = itemView.findViewById(R.id.amount)
@@ -38,6 +40,21 @@ class ExpenseAdapter(private var listExpense : List<ExpenseModel>) : RecyclerVie
         holder.expenseAmount.text = "Rs. ${expense.amount}"
         holder.expenseCategory.text = expense.category.category
         holder.expenseDate.text = "Time ${expense.time} \nDate ${expense.date}"
+
+        holder.itemView.setOnClickListener {
+            if (onClickListener != null) {
+                onClickListener!!.onClick(position, expense)
+            }
+        }
+    }
+
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
+
+    // onClickListener Interface
+    interface OnClickListener {
+        fun onClick(position: Int, model: ExpenseModel)
     }
 
     fun updateItems(newItems: List<ExpenseModel>) {

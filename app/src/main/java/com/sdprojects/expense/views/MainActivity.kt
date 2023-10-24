@@ -11,14 +11,13 @@ import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.sdprojects.expense.R
 import com.sdprojects.expense.adapters.ExpenseAdapter
 import com.sdprojects.expense.models.ExpenseModel
 import com.sdprojects.expense.models.Month
 import com.sdprojects.expense.viewmodels.MainActivityViewModel
 import com.sdprojects.expense.viewmodels.MainActivityViewModelFactory
-import com.sdprojects.expense.viewmodels.NewExpenseViewModel
-import com.sdprojects.expense.viewmodels.NewExpenseViewModelFactory
 import java.util.*
 
 //add a button 'go' besides the year textview.
@@ -49,17 +48,31 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
 
 
-        var expenses = viewModel.getExpenseList()
+        val expenses = viewModel.getExpenseList()
         adapter = ExpenseAdapter(expenses)
         recyclerView.adapter = adapter
-        // this creates a vertical layout Manager
 
 
-        //Populate the dropDown
+        adapter.setOnClickListener(object :
+           ExpenseAdapter.OnClickListener {
+            override fun onClick(position: Int, model: ExpenseModel) {
+                Log.d("check123", "OnClickListener called")
+                val intent = Intent(this@MainActivity, ExpenseEditActivity::class.java)
+                // Passing the data to the EmployeeDetails Activity
+                val obj = toJson(model)
+                Log.d("check123", obj)
+                intent.putExtra(NEXT_SCREEN, model.id.toString())
+                startActivity(intent)
+            }
+        })
+    }
 
-
-
-
+    fun toJson(model: ExpenseModel) : String{
+        val gson = Gson()
+        return gson.toJson(model)
+    }
+    companion object{
+        val NEXT_SCREEN="details_screen"
     }
 
     override fun onResume() {
