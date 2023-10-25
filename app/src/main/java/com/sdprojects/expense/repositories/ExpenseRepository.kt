@@ -24,4 +24,15 @@ class ExpenseRepository(private val expenseDao : ExpenseDao) {
     suspend fun deleteExpenseWithId(id : Int) {
         expenseDao.deleteExpenseWithId(id)
     }
+
+    suspend fun updateExpense(id : Int, model : ExpenseModel) {
+        expenseDao.updateExpense(id,
+                model.name,
+                model.amount,
+                model.category,
+                model.date,
+                model.time,
+                model.note
+            )
+    }
 }

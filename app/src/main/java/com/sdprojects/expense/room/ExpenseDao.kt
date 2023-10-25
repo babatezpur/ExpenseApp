@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.sdprojects.expense.models.Category
 import com.sdprojects.expense.models.ExpenseModel
 
 @Dao
@@ -24,4 +25,7 @@ interface ExpenseDao {
 
     @Query("delete from ExpenseModel where id = :id")
     suspend fun deleteExpenseWithId(id: Int)
+
+    @Query("UPDATE ExpenseModel SET name = :name, amount = :amount, category = :category, date = :date, time = :time, note = :note WHERE id = :id")
+    suspend fun updateExpense(id: Int, name: String, amount: Long, category: Category, date: String, time: String, note: String?)
 }
