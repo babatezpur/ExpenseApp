@@ -12,9 +12,13 @@
         android:theme="@style/Theme.Expense"
         tools:targetApi="31">
         <activity
-            android:name=".views.ExpenseEditActivity"
+            android:name=".views.StatsActivity"
             android:exported="false"
             android:parentActivityName=".views.MainActivity"/>
+        <activity
+            android:name=".views.ExpenseEditActivity"
+            android:exported="false"
+            android:parentActivityName=".views.MainActivity" />
         <activity
             android:name=".views.AddNewExpenseActivity"
             android:exported="false"

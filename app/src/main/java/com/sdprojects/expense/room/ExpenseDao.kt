@@ -28,4 +28,12 @@ interface ExpenseDao {
 
     @Query("UPDATE ExpenseModel SET name = :name, amount = :amount, category = :category, date = :date, time = :time, note = :note WHERE id = :id")
     suspend fun updateExpense(id: Int, name: String, amount: Long, category: Category, date: String, time: String, note: String?)
+
+    @Query("select category , SUM(amount) as total from ExpenseModel group by category order by total desc")
+    suspend fun getExpenseByCategory() : List<ExpenseByCategory>
 }
+
+data class ExpenseByCategory(
+    val category: Category,
+    val total: Long
+)

@@ -130,4 +130,10 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.main_activity_menu, menu)
         return true
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val intent = Intent(applicationContext, StatsActivity::class.java)
+        startActivity(intent)
+        return true
+    }
 }

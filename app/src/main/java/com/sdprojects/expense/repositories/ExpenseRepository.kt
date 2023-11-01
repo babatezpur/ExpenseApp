@@ -1,5 +1,6 @@
 package com.sdprojects.expense.repositories
 
+import com.sdprojects.expense.models.Category
 import com.sdprojects.expense.models.ExpenseModel
 import com.sdprojects.expense.room.ExpenseDao
 
@@ -34,5 +35,17 @@ class ExpenseRepository(private val expenseDao : ExpenseDao) {
                 model.time,
                 model.note
             )
+    }
+
+    suspend fun getExpenseByCategory() : List<Pair<Category, Long>> {
+        val result =  expenseDao.getExpenseByCategory()
+        val list = mutableListOf<Pair<Category,Long>>()
+        result.forEach {
+            list.add(Pair(it.category,it.total))
+        }
+        var sum : Long = 0
+        list.forEach{ sum += it.second }
+        list.add(Pair(Category(category = "Total"),sum))
+        return list
     }
 }

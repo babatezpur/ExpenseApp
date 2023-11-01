@@ -45,6 +45,8 @@ class AddNewExpenseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_expense)
 
+        setTitle("Add new expense")
+
         showDateTimePickerButton = findViewById(R.id.showDateTimePickerButton)
         categoryEditText = findViewById(R.id.editTextCategory)
         dropdownButton = findViewById(R.id.dropdownButton)
